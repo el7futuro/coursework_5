@@ -30,13 +30,16 @@ class Arena(metaclass=BaseSingleton):
         # TODO может быть три результата:
         # TODO Игрок проиграл битву, Игрок выиграл битву, Ничья и сохраняем его в аттрибуте (self.battle_result)
         # TODO если Здоровья игроков в порядке то ничего не происходит
-        if self.player.hp < 0 and self.enemy.hp < 0:
-            self.battle_result = "Ничья"
-        elif self.player.hp < 0:
-            self.battle_result = "Игрок проиграл битву"
-        else:
-            self.battle_result = "Игрок выиграл битву"
-        return self._end_game()
+        if self.player.hp < 0 or self.enemy.hp < 0:
+            if self.player.hp < 0 and self.enemy.hp < 0:
+                self.battle_result = "Ничья"
+            elif self.player.hp < 0:
+                self.battle_result = "Игрок проиграл битву"
+            else:
+                self.battle_result = "Игрок выиграл битву"
+            return self._end_game()
+
+
 
     def _stamina_regeneration(self):
         # TODO регенерация здоровья и стамины для игрока и врага за ход
